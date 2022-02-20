@@ -29,7 +29,7 @@ module.exports = {
         "jest/prefer-to-have-length": "warn",
         "jest/valid-expect": "error",
         "babel/valid-typeof": 1,
-        "babel/no-invalid-this": 1,
+        "babel/no-invalid-this": 0,
         quotes: [2, "double", { avoidEscape: true }],
     },
 };
