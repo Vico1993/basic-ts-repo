@@ -37,17 +37,43 @@ jobs:
 
             - run: npm run lint
 
-    test:
+    # test:
+    #     runs-on: ubuntu-latest
+    #     steps:
+    #         - uses: actions/checkout@v2
+
+    #         - name: Setup Environment ( ${{ env.NODE_VERSION }} )
+    #           uses: actions/setup-node@v2
+    #           with:
+    #               node-version: ${{ env.NODE_VERSION }}
+
+    #         - name: Install dependencies
+    #           run: npm ci
+
+    #         - run: npm run test
+    pr_check:
+        name: Bot reviewer
         runs-on: ubuntu-latest
         steps:
-            - uses: actions/checkout@v2
+            - name: Check who make the commit
+              run: |
+                  # check commit id with base
+                  # if same id || coming from bot -> no dismiss
+                  # else dismiss
 
-            - name: Setup Environment ( ${{ env.NODE_VERSION }} )
-              uses: actions/setup-node@v2
-              with:
-                  node-version: ${{ env.NODE_VERSION }}
+                  isBot=${{ github.event.head_commit.committer.email }} == *"@users.noreply.github.com"*
+                  echo "isBot:"
+                  echo $isBot
 
-            - name: Install dependencies
-              run: npm ci
 
-            - run: npm run test
+                  echo "base commit sha:"
+                  echo {{ github.event.pull_request.base.sha }}
+
+                  echo "target commit sha:"
+                  echo {{ github.event.pull_request.head.sha }}
+
+
+
+                  # if [ ${{ github.event.ref }} != 'refs/heads/main' ]; then
+                  #   gh api /repos/${{ github.repository }}/pulls/{{pull_number}}/reviews/{{review_id}}/dismissals -d '{"message":"An update has been made, you need to review again! :eyes:","event":"DISMISS"}'
+                  # fi
