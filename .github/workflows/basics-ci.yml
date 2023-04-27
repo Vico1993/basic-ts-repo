@@ -66,6 +66,7 @@ jobs:
                   echo ${{ github.event.pull_request.head.user.email }}
                   echo ${{ github.event.pull_request.head_commit }}
                   echo ${{ github.event.sender.email }}
+                  echo ${{ github.event.head_commit.message }}
 
                   # isBot=0
                   # if [[ ${{ github.event.pull_request.head.user.email }} == *"@users.noreply.github.com"* ]]; then
