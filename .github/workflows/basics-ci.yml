@@ -62,16 +62,22 @@ jobs:
                   # else dismiss
 
                   echo ${{ github.event.pull_request.head.user.email }}
-                  echo ${{ github.event.before }}
-                  echo ${{ github.event.after }}
 
                   # isBot=0
                   # if [[ ${{ github.event.pull_request.head.user.email }} == *"@users.noreply.github.com"* ]]; then
                   #   isBot=1
                   # fi
 
+                  isMerged=0
+                  if [[ ${{ github.event.pull_request.base.ref }} != ${{ github.event.pull_request.head.ref }} ]]; then
+                    isMerged=1
+                  fi
+
                   # echo "isBot:"
                   # echo $isBot
+
+                  echo "isMerged:"
+                  echo $isMerged
 
                   echo "base commit sha:"
                   echo ${{ github.event.pull_request.base.ref }}
