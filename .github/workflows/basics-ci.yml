@@ -55,6 +55,8 @@ jobs:
         name: Bot reviewer
         runs-on: ubuntu-latest
         steps:
+            - uses: actions/checkout@v2
+
             - name: Check who make the commit
               run: |
                   # check commit id with base
