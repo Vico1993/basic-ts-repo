@@ -86,13 +86,12 @@ jobs:
                       # Bot is going to list all review and dismiss one by one
                       for review in $(gh api -H "Accept: application/vnd.github+json" -H "X-GitHub-Api-Version: 2022-11-28" /repos/${{ github.repository }}/pulls/${{ github.event.number }}/reviews)
                       do
-                        echo "$review"
-                        # reviewId=$(jq -n --argjson data "$review" '$data.id | length')
-                        # reviewState=$(jq -n --argjson data "$review" '$data.state | length')
+                        reviewId=$(jq -n --argjson data "$review" '$data.id | length')
+                        reviewState=$(jq -n --argjson data "$review" '$data.state | length')
 
-                        # if [ $reviewState == "APPROVED" ]; then
-                        #   gh api /repos/${{ github.repository }}/pulls/${{ github.event.number }}/reviews/$reviewId/dismissals -d '{"message":"An update has been made, you need to review again! :eyes:","event":"DISMISS"}'
-                        # fi
+                        if [ $reviewState == "APPROVED" ]; then
+                          gh api /repos/${{ github.repository }}/pulls/${{ github.event.number }}/reviews/$reviewId/dismissals -d '{"message":"An update has been made, you need to review again! :eyes:","event":"DISMISS"}'
+                        fi
                       done
                   fi
 
