@@ -70,11 +70,14 @@ jobs:
 
                   commit=$( gh api /repos/${{ github.repository }}/commits/${{ github.event.pull_request.head.ref }} )
                   echo $commit
-                  commiterType="$( jq '.committer.type' at $commit )"
-                  parents="$( jq '.parents' as $commit )"
+
+                  # url=$(jq -r --arg job_name "${{ needs.build.outputs.job_name }}" '.jobs | map(select(.name == $job_name)) | .[0].html_url'
+
+                  commiterType=$( jq -r --arg type $commit '.committer.type' )
+                  # parents="$( jq '.parents' as $commit )"
 
                   echo $commiterType
-                  echo $parents
+                  # echo $parents
 
 
                   isBot=0
