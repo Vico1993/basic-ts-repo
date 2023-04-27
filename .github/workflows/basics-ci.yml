@@ -58,6 +58,7 @@ jobs:
             - uses: actions/checkout@v2
 
             - name: Check who make the commit
+              if: github.event.action == 'synchronize'
               run: |
                   # check commit id with base
                   # if same id || coming from bot -> no dismiss
@@ -65,7 +66,7 @@ jobs:
 
                   echo ${{ github.event.pull_request.head.user.email }}
                   echo ${{ github.event.pull_request.head_commit }}
-                  echo ${{ github.event.sender.email }}
+                  echo ${{ github.event.sender.user.email }}
                   echo ${{ github.event.head_commit.message }}
 
                   # isBot=0
