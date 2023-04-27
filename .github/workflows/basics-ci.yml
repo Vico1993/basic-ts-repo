@@ -85,7 +85,7 @@ jobs:
 
                       # Bot is going to list all review and dismiss one by one
                       # 'map(select(.state == "APPROVED")) |
-                      reviews=$(gh api /repos/${{ github.repository }}/pulls/${{ github.event.number }}/reviews | jq -n '.[0].id')
+                      reviews=$( gh api /repos/${{ github.repository }}/pulls/${{ github.event.number }}/reviews | jq -n '.[0].id' )
                       echo $reviews
 
                       # for review in $reviews

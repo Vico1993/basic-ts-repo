@@ -27,6 +27,3 @@ npm run test
 ```Shell
 npm run lint
 ```
-
-lorem
-STOP
