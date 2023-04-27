@@ -85,7 +85,7 @@ jobs:
 
                       # Bot is going to list all review and dismiss one by one
                       # And get id from review who approved the change
-                      reviews=$( gh api /repos/{{ github.repository }}/pulls/${{ github.event.number }}/reviews | jq -r '.[] | if .state == "APPROVED" then .id else empty end' )
+                      reviews=$( gh api /repos/${{ github.repository }}/pulls/${{ github.event.number }}/reviews | jq -r '.[] | if .state == "APPROVED" then .id else empty end' )
                       echo $reviews
 
                       # For each reviewId we need to dismiss
