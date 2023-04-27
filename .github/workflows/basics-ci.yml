@@ -73,7 +73,7 @@ jobs:
 
                   # url=$(jq -r --arg job_name "${{ needs.build.outputs.job_name }}" '.jobs | map(select(.name == $job_name)) | .[0].html_url'
 
-                  commiterType=$( jq -r --arg type $commit '.committer' )
+                  commiterType=$( jq "$commit" '.committer' )
                   # parents="$( jq '.parents' as $commit )"
 
                   echo $commiterType
