@@ -59,7 +59,8 @@ jobs:
 
             - name: Check who make the commit
               if: github.event.action == 'synchronize'
-              # env:
+              env:
+                  GH_TOKEN: ${{ github.token }}
               #     GITHUB_CONTEXT: ${{ toJson(github) }}
               run: |
                   # echo "$GITHUB_CONTEXT"
