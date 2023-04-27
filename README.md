@@ -2,6 +2,8 @@
 
 This repo is my basic setup for a simple ts repo
 
+lorem here!!
+
 ## Basic NPM command
 
 1. Build the project:
