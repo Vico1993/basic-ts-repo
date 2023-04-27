@@ -95,4 +95,4 @@ jobs:
                   #   gh api /repos/${{ github.repository }}/pulls/${{ github.event.number }}/reviews/{{review_id}}/dismissals -d '{"message":"An update has been made, you need to review again! :eyes:","event":"DISMISS"}'
                   # fi
 
-                  jq <<< ${{ github.event.sender }}
+                  jq <<< '${{ github.event.sender }}'
