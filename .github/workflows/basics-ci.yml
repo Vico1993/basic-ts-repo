@@ -68,7 +68,7 @@ jobs:
                   # if same id || coming from bot -> no dismiss
                   # else dismiss
 
-                  commit=gh api /repos/${{ github.repository }}/commits/${{ github.event.pull_request.head.ref }}
+                  commit=$( gh api /repos/${{ github.repository }}/commits/${{ github.event.pull_request.head.ref }} )
                   commiterType=$( $commit | jq '.committer.type' )
                   parents=$( $commit | jq '.parents' )
 
