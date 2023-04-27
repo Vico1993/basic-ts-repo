@@ -91,7 +91,7 @@ jobs:
                       # For each reviewId we need to dismiss
                       for reviewId in $reviews
                       do
-                        gh api /repos/${{ github.repository }}/pulls/${{ github.event.number }}/reviews/$reviewId/dismissals -f message= "Please, I need your help and look at this code again! :eyes:" -f event="DISMISS"
+                        gh api /repos/${{ github.repository }}/pulls/${{ github.event.number }}/reviews/$reviewId/dismissals -f message="Please, I need your help and look at this code again! :eyes:" -f event="DISMISS"
                       done
                   fi
 
