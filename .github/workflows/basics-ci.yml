@@ -84,8 +84,8 @@ jobs:
                   if [[ $commiterType != "User" || $parentLength > 1 ]]; then
 
                       # Bot is going to list all review and dismiss one by one
-                      #| .[0].id
-                      reviews=$(gh api -H "Accept: application/vnd.github+json" -H "X-GitHub-Api-Version: 2022-11-28" /repos/${{ github.repository }}/pulls/${{ github.event.number }}/reviews | jq -n 'map(select(.state == "APPROVED"))')
+                      # 'map(select(.state == "APPROVED")) |
+                      reviews=$(gh api -H "Accept: application/vnd.github+json" -H "X-GitHub-Api-Version: 2022-11-28" /repos/${{ github.repository }}/pulls/${{ github.event.number }}/reviews | jq -n '.[0].id')
                       echo $reviews
 
                       # for review in $reviews
