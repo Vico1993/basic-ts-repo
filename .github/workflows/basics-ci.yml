@@ -59,23 +59,21 @@ jobs:
 
             - name: Check who make the commit
               if: github.event.action == 'synchronize'
-              env:
-                  GITHUB_CONTEXT: ${{ toJson(github) }}
+              # env:
+              #     GITHUB_CONTEXT: ${{ toJson(github) }}
               run: |
-                  echo "$GITHUB_CONTEXT"
+                  # echo "$GITHUB_CONTEXT"
                   # check commit id with base
                   # if same id || coming from bot -> no dismiss
                   # else dismiss
 
-                  echo ${{ github.event.pull_request.head.user.email }}
-                  echo ${{ github.event.pull_request.head_commit }}
-                  echo ${{ github.event.sender.user.email }}
-                  echo ${{ github.event.head_commit.message }}
-
-                  # isBot=0
+                  isBot=0
+                  if [[ ${{ github.event.sender.type }} != "User" ]]; then
                   # if [[ ${{ github.event.pull_request.head.user.email }} == *"@users.noreply.github.com"* ]]; then
-                  #   isBot=1
-                  # fi
+                    isBot=1
+                  fi
+
+                  git --no-pager log -1 --pretty=format:"%s"
 
                   isMerged=0
                   if [[ ${{ github.event.pull_request.base.ref }} != ${{ github.event.pull_request.head.ref }} ]]; then
@@ -97,5 +95,3 @@ jobs:
                   # if [ ${{ github.event.ref }} != 'refs/heads/main' ]; then
                   #   gh api /repos/${{ github.repository }}/pulls/${{ github.event.number }}/reviews/{{review_id}}/dismissals -d '{"message":"An update has been made, you need to review again! :eyes:","event":"DISMISS"}'
                   # fi
-
-                  jq <<< '${{ github.event.sender }}'
