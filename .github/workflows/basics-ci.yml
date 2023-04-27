@@ -61,15 +61,15 @@ jobs:
                   # if same id || coming from bot -> no dismiss
                   # else dismiss
 
-                  echo ${{ github.event.head_commit.committer.email }}
+                  echo ${{ github.event.action }}
 
-                  isBot=0
-                  if [[ ${{ github.event.head_commit.committer.email }} == *"@users.noreply.github.com"* ]]; then
-                    isBot=1
-                  fi
+                  # isBot=0
+                  # if [[ ${{ github.event.head_commit.committer.email }} == *"@users.noreply.github.com"* ]]; then
+                  #   isBot=1
+                  # fi
 
-                  echo "isBot:"
-                  echo $isBot
+                  # echo "isBot:"
+                  # echo $isBot
 
                   echo "base commit sha:"
                   echo {{ github.event.pull_request.base.sha }}
