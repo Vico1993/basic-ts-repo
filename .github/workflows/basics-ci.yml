@@ -85,12 +85,13 @@ jobs:
 
                       # Bot is going to list all review and dismiss one by one
                       # And get id from review who approved the change
-                      reviews=$( gh api /repos/Vico1993/basic-ts-repo/pulls/108/reviews | jq -r '.[] | if .state == "APPROVED" then .id else empty end' )
+                      reviews=$( gh api /repos/{{ github.repository }}/pulls/${{ github.event.number }}/reviews | jq -r '.[] | if .state == "APPROVED" then .id else empty end' )
                       echo $reviews
 
+                      # For each reviewId we need to dismiss
                       for reviewId in $reviews
                       do
-                        gh api /repos/${{ github.repository }}/pulls/${{ github.event.number }}/reviews/$reviewId/dismissals -d '{"message":"An update has been made, you need to review again! :eyes:","event":"DISMISS"}'
+                        gh api /repos/${{ github.repository }}/pulls/${{ github.event.number }}/reviews/$reviewId/dismissals -f message= "Please, I need your help and look at this code again! :eyes:" -f event="DISMISS"
                       done
                   fi
 
