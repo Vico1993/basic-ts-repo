@@ -59,7 +59,10 @@ jobs:
 
             - name: Check who make the commit
               if: github.event.action == 'synchronize'
+              env:
+                  GITHUB_CONTEXT: ${{ toJson(github) }}
               run: |
+                  echo "$GITHUB_CONTEXT"
                   # check commit id with base
                   # if same id || coming from bot -> no dismiss
                   # else dismiss
