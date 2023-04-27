@@ -70,8 +70,8 @@ jobs:
 
                   commit=$( gh api /repos/${{ github.repository }}/commits/${{ github.event.pull_request.head.ref }} )
 
-                  commiterType=jq -n --argjson data "$commit" '$data.committer.type'
-                  parentLength=jq -n --argjson data "$commit" '$data.parents | length'
+                  commiterType=$(jq -n --argjson data "$commit" '$data.committer.type')
+                  parentLength=$(jq -n --argjson data "$commit" '$data.parents | length')
 
                   # commiterType=jq '.committer.type' <<< "$commit"
                   # parentLength=jq '.parents | length' <<< "$commit"
