@@ -61,48 +61,32 @@ jobs:
               if: github.event.action == 'synchronize'
               env:
                   GH_TOKEN: ${{ github.token }}
-              #     GITHUB_CONTEXT: ${{ toJson(github) }}
               run: |
-                  # echo "$GITHUB_CONTEXT"
-                  # check commit id with base
-                  # if same id || coming from bot -> no dismiss
-                  # else dismiss
-
+                  # Getting the commit that trigger the synchronize event
+                  # Last commit from the head
                   commit=$( gh api /repos/${{ github.repository }}/commits/${{ github.event.pull_request.head.ref }} )
 
+                  # Type of User who trigger the update
                   commiterType=$(jq -n --argjson data "$commit" '$data.committer.type')
+
+                  # Number of parents the commit has
+                  # 1 parent, classic commit
+                  # 2 parent it's a merge commit
                   parentLength=$(jq -n --argjson data "$commit" '$data.parents | length')
 
-                  # commiterType=jq '.committer.type' <<< "$commit"
-                  # parentLength=jq '.parents | length' <<< "$commit"
+                  # Dismiss Logic
+                  # If it's a BOT or a Merge commit we don't dismiss
+                  # Everything else, need to dismiss approvals
+                  if [[ $commiterType != "User" || $parentLength > 1 ]]; then
 
-                  echo $commiterType
-                  echo $parentLength
+                      # Bot is going to list all review and dismiss one by one
+                      for review in gh api -H "Accept: application/vnd.github+json" -H "X-GitHub-Api-Version: 2022-11-28" /repos/${{ github.repository }}/pulls/${{ github.event.number }}/reviews
+                      do
+                        reviewId=$(jq -n --argjson data "$review" '$data.id | length')
+                        reviewState=$(jq -n --argjson data "$review" '$data.state | length')
 
-
-                  isBot=0
-                  if [[ ${{ github.event.sender.type }} != "User" ]]; then
-                  # if [[ ${{ github.event.pull_request.head.user.email }} == *"@users.noreply.github.com"* ]]; then
-                    isBot=1
+                        if [ $reviewState == "APPROVED" ]; then
+                          gh api /repos/${{ github.repository }}/pulls/${{ github.event.number }}/reviews/$reviewId/dismissals -d '{"message":"An update has been made, you need to review again! :eyes:","event":"DISMISS"}'
+                        fi
+                      done
                   fi
-
-                  isMerged=0
-                  if [[ ${{ github.event.pull_request.base.ref }} != ${{ github.event.pull_request.head.ref }} ]]; then
-                    isMerged=1
-                  fi
-
-                  # echo "isBot:"
-                  # echo $isBot
-
-                  echo "isMerged:"
-                  echo $isMerged
-
-                  echo "base commit sha:"
-                  echo ${{ github.event.pull_request.base.ref }}
-
-                  echo "target commit sha:"
-                  echo ${{ github.event.pull_request.head.ref }}
-
-                  # if [ ${{ github.event.ref }} != 'refs/heads/main' ]; then
-                  #   gh api /repos/${{ github.repository }}/pulls/${{ github.event.number }}/reviews/{{review_id}}/dismissals -d '{"message":"An update has been made, you need to review again! :eyes:","event":"DISMISS"}'
-                  # fi
