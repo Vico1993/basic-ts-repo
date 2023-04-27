@@ -62,6 +62,8 @@ jobs:
                   # else dismiss
 
                   echo ${{ github.event.pull_request.head.user.email }}
+                  echo ${{ github.event.before }}
+                  echo ${{ github.event.after }}
 
                   # isBot=0
                   # if [[ ${{ github.event.pull_request.head.user.email }} == *"@users.noreply.github.com"* ]]; then
@@ -78,5 +80,7 @@ jobs:
                   echo ${{ github.event.pull_request.head.sha }}
 
                   # if [ ${{ github.event.ref }} != 'refs/heads/main' ]; then
-                  #   gh api /repos/${{ github.repository }}/pulls/{{pull_number}}/reviews/{{review_id}}/dismissals -d '{"message":"An update has been made, you need to review again! :eyes:","event":"DISMISS"}'
+                  #   gh api /repos/${{ github.repository }}/pulls/${{ github.event.number }}/reviews/{{review_id}}/dismissals -d '{"message":"An update has been made, you need to review again! :eyes:","event":"DISMISS"}'
                   # fi
+
+                  echo jq '.[]' ${{ github.event }}
