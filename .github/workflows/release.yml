@@ -26,4 +26,4 @@ jobs:
 
             - name: Create release
               run: |
-                  gh release create 2.0 ./*.zip -p --generate-notes
+                  gh release create 2.0 ./*.zip -p --generate-notes --draft=true
