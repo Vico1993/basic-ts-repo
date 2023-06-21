@@ -3,7 +3,7 @@ name: RELEASE
 on:
     release:
         types:
-            - released
+            - published
 
 env:
     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
