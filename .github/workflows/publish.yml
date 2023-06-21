@@ -23,6 +23,7 @@ jobs:
             - name: Fetch the download url from the release file
               run: |
                   downloadUrl=$(jq -r '.assets[] | select(.name=="conversational-commerce-2.0.zip").download_url' ${{ github.event.release }} )
+                  echo $downloadUrl
                   cd ./dist && mkdir tmp
                   wget -O ./dist/tmp/conversational-commerce-2.0.zip $downloadUrl
 
