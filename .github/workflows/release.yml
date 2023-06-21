@@ -9,8 +9,8 @@ env:
     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
 jobs:
-    deployment:
-        name: Prod deployemnt
+    release:
+        name: Create Release
         runs-on: ubuntu-latest
         steps:
             - uses: actions/checkout@v3
