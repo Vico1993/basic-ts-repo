@@ -22,9 +22,9 @@ jobs:
 
             - name: Fetch the download url from the release file
               run: |
-                  downloadUrl=$(jq -r '.assets[] | select(.name=="conversational-commerce-${{ $PACKAGE_VERSION }}.zip").download_url' ${{ github.event.release }} )
+                  downloadUrl=$(jq -r '.assets[] | select(.name=="conversational-commerce-2.0.zip").download_url' ${{ github.event.release }} )
                   cd ./dist && mkdir tmp
-                  wget -O ./dist/tmp/conversational-commerce-${{ $PACKAGE_VERSION }}.zip $downloadUrl
+                  wget -O ./dist/tmp/conversational-commerce-2.0.zip $downloadUrl
 
             - name: Download the release file
               run: |
