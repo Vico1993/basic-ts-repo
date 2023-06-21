@@ -1,0 +1,31 @@
+name: RELEASE
+
+on:
+    release:
+        types:
+            - released
+
+env:
+    GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+jobs:
+    deployment:
+        name: Prod deployemnt
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v3
+
+            - name: Setup Environment ( ${{ env.NODE_VERSION }} )
+              uses: actions/setup-node@v3
+              with:
+                  node-version: ${{ env.NODE_VERSION }}
+
+            - name: Fetch the download url from the release file
+              run: |
+                  downloadUrl=$(jq -r '.assets[] | select(.name=="conversational-commerce-2.0.zip").download_url' ${{ github.event.release }} )
+                  echo $downloadUrl
+
+            - name: Download the release file
+              run: |
+                  cd ./dist && mkdir tmp
+                  wget -O ./dist/tmp/conversational-commerce-2.0.zip

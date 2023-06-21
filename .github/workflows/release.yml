@@ -1,0 +1,29 @@
+name: Create release
+
+on:
+    push:
+        branches:
+            - release
+
+env:
+    GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+jobs:
+    deployment:
+        name: Prod deployemnt
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v3
+
+            - name: Setup Environment ( ${{ env.NODE_VERSION }} )
+              uses: actions/setup-node@v3
+              with:
+                  node-version: ${{ env.NODE_VERSION }}
+
+            - name: Create ZIP
+              run: |
+                  zip -r conversational-commerce-2.0.zip src
+
+            - name: Create release
+              run: |
+                  gh release create 2.0 ./*.zip -p --generate-notes
