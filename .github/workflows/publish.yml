@@ -21,10 +21,9 @@ jobs:
                   node-version: ${{ env.NODE_VERSION }}
 
             - name: Fetch the download url from the release file
-              env:
-                  ASSETS: ${{ fromJson(github.event.release).assets }}
               run: |
-                  downloadUrl=$(jq --raw-output '.[] | select(.name=="conversational-commerce-2.0.zip").browser_download_url' ${{ env.ASSETS }})
+                  assets=${{ fromJson(github.event.release).assets }}
+                  downloadUrl=$(jq -r -n --argjson data "$assets" '.[] | select(.name=="conversational-commerce-2.0.zip").browser_download_url')
                   echo $downloadUrl
                   cd ./dist && mkdir tmp
                   wget -O ./dist/tmp/conversational-commerce-2.0.zip $downloadUrl
