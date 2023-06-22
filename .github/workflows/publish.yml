@@ -22,14 +22,12 @@ jobs:
 
             - name: Fetch the download url from the release file
               env:
-                  assets: ${{ toJSON(github.event.release) }}
+                  RELEASE: ${{ toJSON(github.event.release) }}
+                  PACKAGE_VERSION: ${{ github.event.release.tag_name }}
               run: |
-
-
-                  downloadUrl=$(jq -r -n --argjson data "$assets" '$data.assets[] | select(.name=="conversational-commerce-2.0.zip").browser_download_url')
-                  echo $downloadUrl
+                  downloadUrl=$(jq -r -n --argjson PACKAGE_VERSION "$PACKAGE_VERSION" --argjson data "$RELEASE" '$data.assets[] | select(.name=="conversational-commerce-$PACKAGE_VERSION.zip").browser_download_url')
                   cd ./dist && mkdir tmp
-                  wget -O ./dist/tmp/conversational-commerce-2.0.zip $downloadUrl
+                  wget -O ./dist/tmp/conversational-commerce-$PACKAGE_VERSION.zip $downloadUrl
 
             - name: Download the release file
               run: |
