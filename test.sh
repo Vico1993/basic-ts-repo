@@ -1,4 +1,4 @@
-eval $( read -r -d '' assets << EOM
+read -r -d '' assets << EOM
 {
     "assets": [
       {
@@ -74,7 +74,7 @@ eval $( read -r -d '' assets << EOM
     "url": "https://api.github.com/repos/Vico1993/basic-ts-repo/releases/109545206",
     "zipball_url": "https://api.github.com/repos/Vico1993/basic-ts-repo/zipball/2.0"
 }
-EOM )
+EOM
 
   downloadUrl=$(jq -r -n --argjson data "$assets" '$data.assets[] | select(.name=="conversational-commerce-2.0.zip").browser_download_url')
   echo $downloadUrl
