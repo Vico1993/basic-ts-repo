@@ -25,7 +25,7 @@ jobs:
                   RELEASE: ${{ toJSON(github.event.release) }}
                   PACKAGE_VERSION: ${{ github.event.release.tag_name }}
               run: |
-                  downloadUrl=$(jq -r -n --argjson PACKAGE_VERSION "$PACKAGE_VERSION" --argjson data "$RELEASE" '$data.assets[] | select(.name=="conversational-commerce-$PACKAGE_VERSION.zip").browser_download_url')
+                  downloadUrl=$(jq -r -n --arg PACKAGE_VERSION "$PACKAGE_VERSION" --argjson data "$RELEASE" '$data.assets[] | select(.name=="conversational-commerce-$PACKAGE_VERSION.zip").browser_download_url')
                   echo $downloadUrl
                   mkdir ./dist/tmp
                   wget -O ./dist/tmp/conversational-commerce-$PACKAGE_VERSION.zip $downloadUrl
