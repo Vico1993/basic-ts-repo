@@ -5,10 +5,10 @@
 import type { Config } from "@jest/types";
 
 const config: Config.InitialOptions = {
-    verbose: true,
-    coveragePathIgnorePatterns: ["/node_modules/", "/build/"],
-    testEnvironment: "node",
-    preset: "ts-jest",
-    clearMocks: true,
+  verbose: true,
+  coveragePathIgnorePatterns: ["/node_modules/", "/build/"],
+  testEnvironment: "node",
+  preset: "ts-jest",
+  clearMocks: true,
 };
 export default config;
