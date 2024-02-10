@@ -8,6 +8,7 @@ module.exports = {
     },
     ignorePatterns: ["**/build/*", "node_modules/*"],
     extends: [
+        "eslint:recommended",
         "plugin:@typescript-eslint/recommended",
         "plugin:@typescript-eslint/eslint-recommended",
         "plugin:@typescript-eslint/recommended-requiring-type-checking",
@@ -30,6 +31,10 @@ module.exports = {
         "jest/valid-expect": "error",
         "babel/valid-typeof": 1,
         "babel/no-invalid-this": 0,
-        quotes: [2, "double", { avoidEscape: true }],
+        // enable additional rules
+        indent: ["error", 4],
+        "linebreak-style": ["error", "unix"],
+        quotes: ["error", "double"],
+        semi: ["error", "always"],
     },
 };
