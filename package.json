@@ -1,33 +1,33 @@
 {
-  "name": "basic-ts-repo",
-  "version": "1.0.0",
-  "main": "build/index.js",
-  "types": "build/index.d.ts",
-  "license": "MIT",
-  "files": [
-    "build"
-  ],
-  "repository": "git@github.com:vico1993/basic-ts-repo.git",
-  "scripts": {
-    "build": "tsc -p tsconfig.json",
-    "test": "jest",
-    "watch": "nodemon --watch \"src/**\" --ext \"ts,json\" --ignore \"src/**/*.spec.ts\" --exec \"ts-node src/index.ts\"",
-    "lint": "eslint --ext .ts ."
-  },
-  "devDependencies": {
-    "@babel/core": "^7.24.5",
-    "@babel/eslint-parser": "^7.24.5",
-    "@types/jest": "^29.5.12",
-    "@types/node": "^20.12.11",
-    "@typescript-eslint/eslint-plugin": "^7.0.0",
-    "@typescript-eslint/parser": "^6.21.0",
-    "eslint": "^8.57.0",
-    "eslint-plugin-babel": "^5.3.1",
-    "eslint-plugin-jest": "^28.5.0",
-    "jest": "^29.7.0",
-    "nodemon": "^3.1.0",
-    "ts-jest": "^29.1.2",
-    "ts-node": "^10.9.2",
-    "typescript": "^5.4.5"
-  }
+    "name": "basic-ts-repo",
+    "version": "1.0.0",
+    "main": "build/index.js",
+    "types": "build/index.d.ts",
+    "license": "MIT",
+    "files": [
+        "build"
+    ],
+    "repository": "git@github.com:vico1993/basic-ts-repo.git",
+    "scripts": {
+        "build": "tsc -p tsconfig.json",
+        "test": "jest",
+        "watch": "nodemon --watch \"src/**\" --ext \"ts,json\" --ignore \"src/**/*.spec.ts\" --exec \"ts-node src/index.ts\"",
+        "lint": "eslint --ext .ts ."
+    },
+    "devDependencies": {
+        "@babel/core": "^7.24.5",
+        "@babel/eslint-parser": "^7.24.5",
+        "@types/jest": "^29.5.12",
+        "@types/node": "^20.12.11",
+        "@typescript-eslint/eslint-plugin": "^7.0.0",
+        "@typescript-eslint/parser": "^7.10.0",
+        "eslint": "^8.57.0",
+        "eslint-plugin-babel": "^5.3.1",
+        "eslint-plugin-jest": "^28.5.0",
+        "jest": "^29.7.0",
+        "nodemon": "^3.1.0",
+        "ts-jest": "^29.1.2",
+        "ts-node": "^10.9.2",
+        "typescript": "^5.4.5"
+    }
 }
