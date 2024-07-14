@@ -15,7 +15,7 @@
         "lint": "eslint --ext .ts ."
     },
     "devDependencies": {
-        "@babel/core": "^7.24.5",
+        "@babel/core": "^7.24.8",
         "@babel/eslint-parser": "^7.24.5",
         "@types/jest": "^29.5.12",
         "@types/node": "^20.12.11",
