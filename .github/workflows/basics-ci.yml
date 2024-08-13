@@ -67,20 +67,7 @@ jobs:
             - lint
         if: github.event_name == 'pull_request' && github.actor == 'dependabot[bot]'
         steps:
-            - name: automerge
-              uses: actions/github-script@v7
+            - name: Auto Merge Dependabot Updates
+              uses: buluma/gh-action-auto-merge-dependabot-updates@1.0.8
               with:
-                  script: |
-                      github.pullRequests.createReview({
-                          owner: context.payload.repository.owner.login,
-                          repo: context.payload.repository.name,
-                          pull_number: context.payload.pull_request.number,
-                          event: 'APPROVE'
-                      })
-
-                      github.pullRequests.merge({
-                          owner: context.payload.repository.owner.login,
-                          repo: context.payload.repository.name,
-                          pull_number: context.payload.pull_request.number
-                      })
-                  github-token: ${{ env.GITHUB_TOKEN }}
+                  allowed-actors: dependabot-preview[bot], dependabot[bot]
