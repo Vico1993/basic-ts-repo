@@ -71,3 +71,4 @@ jobs:
               uses: buluma/gh-action-auto-merge-dependabot-updates@1.0.8
               with:
                   allowed-actors: dependabot-preview[bot], dependabot[bot]
+                  allowed-update-types: devDependencies:minor, devDependencies:major, devDependencies:patch
