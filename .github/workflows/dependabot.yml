@@ -11,7 +11,6 @@ jobs:
         runs-on: ubuntu-latest
         permissions:
             pull-requests: write
-        if: github.event_name == 'pull_request' && github.actor == 'dependabot[bot]'
         steps:
             - name: Auto Merge Dependabot Updates
               uses: buluma/gh-action-auto-merge-dependabot-updates@v1
