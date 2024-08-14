@@ -70,8 +70,9 @@ jobs:
         if: github.event_name == 'pull_request' && github.actor == 'dependabot[bot]'
         steps:
             - name: Auto Merge Dependabot Updates
-              uses: buluma/gh-action-auto-merge-dependabot-updates@1.0.8
+              uses: buluma/gh-action-auto-merge-dependabot-updates@v1
               with:
                   allowed-actors: dependabot-preview[bot], dependabot[bot]
+                  use-auto-merge: true
                   repo-token: ${{ env.GITHUB_TOKEN }}
                   allowed-update-types: devDependencies:minor, devDependencies:major, devDependencies:patch
