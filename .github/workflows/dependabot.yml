@@ -13,7 +13,7 @@ jobs:
             pull-requests: write
         steps:
             - name: Auto Merge Dependabot Updates
-              uses: buluma/gh-action-auto-merge-dependabot-updates@v1
+              uses: tjenkinson/gh-action-auto-merge-dependency-updates@v1.4.2
               with:
                   allowed-actors: dependabot-preview[bot], dependabot[bot]
                   use-auto-merge: true
