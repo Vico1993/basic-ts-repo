@@ -1,6 +1,6 @@
 # Basic ts repo
 
-This repo is my basic setup for a simple ts repo
+This repo is my basic setup for a simple typescript repo
 
 ## Basic NPM command
 
