@@ -1,6 +1,6 @@
 # Basic ts repo
 
-This repo is my basic setup for a simple ts repo. It include ts / jest and eslint
+This repo is my basic setup for a simple typescript repo. It include ts / jest and eslint
 
 ## Basic NPM command
 
